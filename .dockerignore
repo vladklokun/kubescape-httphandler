@@ -1,0 +1,8 @@
+build
+# .git directory is purposefully commented out, since kubescape-http relies
+# on the git2go submodule, and the submodule must be properly initialized in
+# the .git directory inside the container so the build can work
+# .git
+
+# Keep git2go out of the image to refresh it on each build
+git2go
