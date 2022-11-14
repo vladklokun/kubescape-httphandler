@@ -1,0 +1,27 @@
+name: "Release a new version"
+
+on:
+  push:
+    branches: [ "master" ]
+    paths-ignore:
+      # Do not run the pipeline if only Markdown files changed
+      - '**.md'
+
+jobs:
+  run_tests:
+    uses: ./.github/workflows/test.yaml
+    with:
+      release: "v1.0.${{ github.run_number }}"
+      client: "image-builder"
+  publish_image:
+    uses: ./.github/workflows/build_publish_image.yaml
+    needs: run_tests
+    with:
+      client: "image"
+      image_name: "quay.io/armo_vladk/kubescape-http"
+      image_tag: "test-v1.0.${{ github.run_number }}"
+      support_platforms: false
+      cosign: true
+    secrets:
+      QUAYIO_ROBOT_USERNAME: {{ secrets.QUAYIO_ROBOT_USERNAME }}
+      QUAYIO_ROBOT_PASSWORD: {{ secrets.QUAYIO_ROBOT_PASSWORD }}
