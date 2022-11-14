@@ -27,9 +27,9 @@ on:
         description: 'Support amd64/arm64'
 
     secrets:
-      registry-username:
+      QUAYIO_ROBOT_USERNAME:
         required: true
-      registry-password:
+      QUAYIO_ROBOT_PASSWORD:
         required: true
 
 jobs:
@@ -42,12 +42,6 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -57,24 +51,3 @@ jobs:
           QUAYIO_USERNAME: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
           QUAYIO_PASSWORD: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}
         run: docker login -u="${QUAYIO_USERNAME}" -p="${QUAYIO_PASSWORD}" quay.io
-
-      - name: Build and push image
-        if: ${{ inputs.support_platforms }}
-        run: docker buildx build . --file build/Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.image_tag }} --tag ${{ inputs.image_name }}:latest --build-arg image_version=${{ inputs.image_tag }} --build-arg client=${{ inputs.client }} --push --platform linux/amd64,linux/arm64
-
-      - name: Build and push image without amd64/arm64 support
-        if: ${{ !inputs.support_platforms }}
-        run: docker buildx build . --file build/Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.image_tag }} --tag ${{ inputs.image_name }}:latest --build-arg image_version=${{ inputs.image_tag }} --build-arg client=${{ inputs.client }} --push
-
-      - name: Install cosign
-        uses: sigstore/cosign-installer@main
-        with:
-          cosign-release: 'v1.12.0'
-      - name: sign kubescape container image
-        if: ${{ inputs.cosign }}
-        env:
-          COSIGN_EXPERIMENTAL: "true"
-        run: |
-            cosign sign --force ${{ inputs.image_name }}:latest
-            cosign sign --force ${{ inputs.image_name }}:${{ inputs.image_tag }}
-
