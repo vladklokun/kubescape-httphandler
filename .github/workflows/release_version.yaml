@@ -23,5 +23,5 @@ jobs:
       support_platforms: false
       cosign: true
     secrets:
-      QUAYIO_ROBOT_PASSWORD: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}
-      QUAYIO_ROBOT_USERNAME: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
+      quayio-username: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}
+      quayio-password: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
