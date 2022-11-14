@@ -4,7 +4,7 @@ import hashlib
 import platform
 import subprocess
 
-BASE_GETTER_CONST = "github.com/kubescape/kubescape/v2/core/cautils/getter"
+_PACKAGE_NAME_BASE = "kubescape-http"
 
 def check_status(status, msg):
     if status != 0:
@@ -24,13 +24,13 @@ def get_build_dir():
     return os.path.join("build", build_dir)
 
 def get_package_name():
-    package_name = "kubescape"
+    package_name = _PACKAGE_NAME_BASE
     # TODO: if platform.system() == "Windows": packageName += ".exe" - we should find all places were we access the windows executable before changing the extension 
     return package_name
 
 
 def main():
-    print("Building Kubescape")
+    print("Building Kubescape HTTP")
 
     # Set some variables
     package_name = get_package_name()
@@ -49,7 +49,7 @@ def main():
     if not os.path.isdir(build_dir):
         os.makedirs(build_dir)
 
-    # Build kubescape
+    # Build the executable
     ldflags = "-w -s"
     if release_version:
         ldflags += " -X {}={}".format(build_url, release_version)

@@ -5,7 +5,7 @@ on:
 
 jobs:
   run_tests:
-    uses: ./.github/workflows/reusable/test.yaml
+    uses: ./.github/workflows/test.yaml
     with:
       release: "v2.0.${{ github.run_number }}"
       client: "test"
