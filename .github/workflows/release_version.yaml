@@ -23,5 +23,5 @@ jobs:
       support_platforms: false
       cosign: true
     secrets:
-      registry_username: {{ secrets.QUAYIO_ROBOT_USERNAME }}
-      registry_password: {{ secrets.QUAYIO_ROBOT_PASSWORD }}
+      registry-username: {{ secrets.QUAYIO_ROBOT_USERNAME }}
+      registry-password: {{ secrets.QUAYIO_ROBOT_PASSWORD }}

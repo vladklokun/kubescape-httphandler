@@ -27,9 +27,9 @@ on:
         description: 'Support amd64/arm64'
 
     secrets:
-      registry_username:
+      registry-username:
         required: true
-      registry_password:
+      registry-password:
         required: true
 
 jobs:
