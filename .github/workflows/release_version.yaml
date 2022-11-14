@@ -15,7 +15,7 @@ jobs:
       client: "image-builder"
   publish_image:
     uses: ./.github/workflows/build_publish_image.yaml
-    # needs: run_tests
+    needs: run_tests
     with:
       client: "image"
       image_name: "quay.io/armo_vladk/kubescape-http"
@@ -23,5 +23,5 @@ jobs:
       support_platforms: false
       cosign: true
     secrets:
-      quayio-username: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}
-      quayio-password: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
+      quayio-username: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
+      quayio-password: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}

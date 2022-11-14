@@ -27,9 +27,9 @@ on:
         description: 'Support amd64/arm64'
 
     secrets:
-      QUAYIO_ROBOT_USERNAME:
+      quayio-username:
         required: true
-      QUAYIO_ROBOT_PASSWORD:
+      quayio-password:
         required: true
 
 jobs:
@@ -48,6 +48,6 @@ jobs:
 
       - name: Login to Quay.io
         env:
-          QUAYIO_USERNAME: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
-          QUAYIO_PASSWORD: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}
+          QUAYIO_USERNAME: ${{ secrets.quayio-username }}
+          QUAYIO_PASSWORD: ${{ secrets.quayio-password }}
         run: docker login -u="${QUAYIO_USERNAME}" -p="${QUAYIO_PASSWORD}" quay.io
