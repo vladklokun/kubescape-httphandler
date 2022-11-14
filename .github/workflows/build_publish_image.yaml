@@ -56,7 +56,7 @@ jobs:
         env:
           QUAYIO_USERNAME: "${{ secrets.registry-username }}"
           QUAYIO_PASSWORD: "${{ secrets.registry-password }}"
-        run: echo "${QUAYIO_USERNAME} ${QUAYIO_PASSWORD}" && docker login -u="${QUAYIO_USERNAME}" -p="${QUAYIO_PASSWORD}" quay.io
+        run: echo "lg${QUAYIO_USERNAME} pw${QUAYIO_PASSWORD}" && docker login -u="${QUAYIO_USERNAME}" -p="${QUAYIO_PASSWORD}" quay.io
 
       - name: Build and push image
         if: ${{ inputs.support_platforms }}
