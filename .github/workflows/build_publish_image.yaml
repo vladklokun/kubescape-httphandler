@@ -57,11 +57,11 @@ jobs:
 
       - name: Build and push image
         if: ${{ inputs.support_platforms }}
-        run: docker buildx build . --file build/Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.image_tag }} --tag ${{ inputs.image_name }}:latest --build-arg image_version=${{ inputs.image_tag }} --build-arg client=${{ inputs.client }} --push --platform linux/amd64,linux/arm64
+        run: docker buildx build . --file ./Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.image_tag }} --tag ${{ inputs.image_name }}:latest --build-arg image_version=${{ inputs.image_tag }} --build-arg client=${{ inputs.client }} --push --platform linux/amd64,linux/arm64
      
       - name: Build and push image without amd64/arm64 support
         if: ${{ !inputs.support_platforms }}
-        run: docker buildx build . --file build/Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.image_tag }} --tag ${{ inputs.image_name }}:latest --build-arg image_version=${{ inputs.image_tag }} --build-arg client=${{ inputs.client }} --push
+        run: docker buildx build . --file ./Dockerfile --tag ${{ inputs.image_name }}:${{ inputs.image_tag }} --tag ${{ inputs.image_name }}:latest --build-arg image_version=${{ inputs.image_tag }} --build-arg client=${{ inputs.client }} --push
 
       - name: Install cosign
         uses: sigstore/cosign-installer@main
