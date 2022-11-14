@@ -54,9 +54,9 @@ jobs:
 
       - name: Login to Quay.io
         env:
-          QUAY_PASSWORD: ${{ secrets.QUAYIO_ROBOT_PASSWORD }}
-          QUAY_USERNAME: ${{ secrets.QUAYIO_ROBOT_USERNAME }}
-        run: docker login -u="${QUAY_USERNAME}" -p="${QUAY_PASSWORD}" quay.io
+          REGISTRY_USERNAME: "${{ secrets.registry-username }}"
+          REGISTRY_PASSWORD: "${{ secrets.registry-password }}"
+        run: docker login -u="${REGISTRY_USERNAME}" -p="${REGISTRY_PASSWORD}" quay.io
 
       - name: Build and push image
         if: ${{ inputs.support_platforms }}
