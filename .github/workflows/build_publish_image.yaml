@@ -27,9 +27,9 @@ on:
         description: 'Support amd64/arm64'
 
     secrets:
-      QUAYIO_ROBOT_USERNAME:
+      registry_username:
         required: true
-      QUAYIO_ROBOT_PASSWORD:
+      registry_password:
         required: true
 
 jobs:
