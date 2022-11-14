@@ -22,6 +22,4 @@ jobs:
       image_tag: "test-v1.0.${{ github.run_number }}"
       support_platforms: false
       cosign: true
-    secrets:
-      registry-username: "{{ secrets.QUAYIO_ROBOT_USERNAME }}"
-      registry-password: "{{ secrets.QUAYIO_ROBOT_PASSWORD }}"
+    secrets: "inherit"
