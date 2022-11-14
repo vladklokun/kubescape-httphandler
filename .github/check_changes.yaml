@@ -1,0 +1,11 @@
+name: "Run PR checks"
+
+on:
+  push:
+
+jobs:
+  run_tests:
+    uses: ./.github/workflows/reusable/test.yaml
+    with:
+      release: "v2.0.${{ github.run_number }}"
+      client: "test"
