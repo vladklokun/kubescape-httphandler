@@ -65,6 +65,6 @@ USER ${KUBESCAPE_USER}
 
 WORKDIR /home/${KUBESCAPE_USER}
 
-COPY --chown=${KUBESCAPE_USER}:${KUBESCAPE_GROUP} --from=build-stage ${KUBESCAPE_BUILD_DIR}/build/ubuntu-latest/kubescape /usr/bin/kubescape-http
+COPY --chown=${KUBESCAPE_USER}:${KUBESCAPE_GROUP} --from=build-stage ${KUBESCAPE_BUILD_DIR}/build/ubuntu-latest/kubescape-http /usr/bin/kubescape-http
 
 ENTRYPOINT ["kubescape-http"]
